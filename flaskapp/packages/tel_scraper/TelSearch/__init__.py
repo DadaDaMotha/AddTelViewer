@@ -19,7 +19,11 @@ def get_entry_count(page):
     :return: how many search results are there for the query
     '''
 
-    entries_info = page.header.h1.text
+    tmp = page.header.h1
+    if tmp:
+        entries_info = tmp.text
+    else:
+        return 1
     # total_entries = re.search(r"^\d+", entries_info)[0]
     entry_count = re.search(r"^\s*(\d+)", entries_info).group(1)
     return entry_count

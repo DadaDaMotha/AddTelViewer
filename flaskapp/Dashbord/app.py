@@ -2,6 +2,7 @@ import os
 from flask import send_from_directory
 from DashCustom import layouts, custom_class
 from server import server
+import config
 # app = dash.Dash(__name__, server=server, url_base_pathname='/dash')
 
 app = custom_class.DashResponsive(name="dashbord", sharing=True, server=server, url_base_pathname='/')
@@ -19,6 +20,7 @@ app.set_main_wrapper(wrapper, replace_string=layouts.repl_string)
 # #     'CACHE_DIR': 'cache-directory'
 # # })
 app.config.supress_callback_exceptions = True
+
 
 # '/static/dash-technical-charting.css'
 

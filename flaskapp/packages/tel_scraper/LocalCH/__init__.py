@@ -16,8 +16,13 @@ def get_entry_count(page):
     :return:
     '''
     result_info = page.body.small.text.replace('\n', '')
-    entry_count = re.search(r"\d+", result_info)[0]
-    return entry_count
+    tmp = re.search(r"\d+", result_info)
+    if tmp:
+        entry_count = tmp[0]
+        return entry_count
+    else:
+        # Evemtually there is just one on not match
+        return 1
 
 def generate_search_url(was='', wo='', category=None, page=None):
     '''

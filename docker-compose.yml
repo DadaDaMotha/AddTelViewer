@@ -37,8 +37,8 @@ services:
 #    ports:
 #      - "5432:5432"
 #    environment:
-#      POSTGRES_USER: postgres
-#      POSTGRES_PASSWORD: postgres
+#      POSTGRES_USER: telscraper
+#      POSTGRES_PASSWORD: vood005643
 #      POSTGRES_DB: TEST_SM
 #    volumes:
 #      - pgdata:/var/lib/postgresql/data

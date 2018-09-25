@@ -7,4 +7,4 @@ from server import server
 import Dashbord.index
 
 if __name__ == '__main__':
-    server.run(debug=True)
+    server.run()

@@ -47,7 +47,7 @@ dashbord_simple="""
               <li class="nav-item">
                 <a class="nav-link icyLink" href="/info/">
                   <span data-feather="info"></span>
-                  Was ist AddTelViewer?
+                  Info
                 </a>
               </li>
             </ul>

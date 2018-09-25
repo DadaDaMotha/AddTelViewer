@@ -8,6 +8,8 @@ from Dashbord.app import app
 from six.moves.urllib.parse import quote
 import datetime as dt
 
+from db_models import Phonebook
+
 
 from packages.tel_scraper import LocalCH, TelSearch
 
@@ -17,6 +19,11 @@ layout = html.Div(className='container cm-top', children=[
 
 
             html.Div(className='row', children=[
+                html.Div(className='col-sm-2', children=[
+                    dcc.Dropdown(id='source-dropdown', className='mt',
+                             options=[{'label': x, 'value': x} for x in ['TelSearch', 'LocalCH']], value='LocalCH',
+                 clearable=False)
+                ]),
 
                 html.Div(className='col-sm-3', children=[
                     dcc.Input(id="was-query", className='form-control form-control mt', type="text", size=20,
@@ -66,8 +73,9 @@ layout = html.Div(className='container cm-top', children=[
 @app.callback(
     Output('datatable-query', 'rows'),
     [Input('button-query', 'n_clicks')],
-    state=[State('was-query', 'value'), State('wo-query', 'value'), State('cat-dropdown', 'value')])
-def fill_data(n_clicks, was, wo, cat):
+    state=[State('was-query', 'value'), State('wo-query', 'value'),
+           State('cat-dropdown', 'value'), State('source-dropdown', 'value')])
+def fill_data(n_clicks, was, wo, cat, source):
 
     if (n_clicks > 0) and (was or wo):
 
@@ -76,6 +84,7 @@ def fill_data(n_clicks, was, wo, cat):
         print('type wo', type(wo))
         print('type was', type(was))
         print('type cat', type(cat))
+        print('type cat', type(source))
 
         query_dict = {
             'was': was,
@@ -83,7 +92,13 @@ def fill_data(n_clicks, was, wo, cat):
             'category': cat
         }
 
-        df_query = LocalCH.page_aggregator(query_dict, max_pages=5)
+        if source == 'LocalCH':
+            df_query = LocalCH.page_aggregator(query_dict, max_pages=5)
+        elif source == 'TelSearch':
+            df_query = TelSearch.page_aggregator(query_dict, max_pages=5)
+        else:
+            return [{}]
+
         df_query_final = df_query[df_query.columns.difference(['URL', 'query'])]
 
         table_cont = df_query_final .to_dict('records')

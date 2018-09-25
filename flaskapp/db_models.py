@@ -27,7 +27,5 @@ class Phonebook(db.Model):
     query = db.Column(db.String(50), unique=False, nullable=True)
     created_at = db.Column(db.DateTime(), unique=False, nullable=False)
 
-
-
     def __repr__(self):
         return '<Name %r>' % self.Bezeichnung

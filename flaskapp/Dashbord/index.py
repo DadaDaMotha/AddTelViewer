@@ -6,8 +6,6 @@ import dash_table_experiments as dte
 from Dashbord.app import app
 from Dashbord.pages import map_start, telscraper, info
 
-# Set the title
-app.static_page_title = 'AddTelViewer'
 
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),

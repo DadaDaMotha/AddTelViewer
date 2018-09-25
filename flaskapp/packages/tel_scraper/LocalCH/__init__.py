@@ -91,7 +91,7 @@ def df_from_page(local_ch_search_url):
         addr_tot = container.a.find('div', {'class': 'listing-address'}).text.replace('\n', '')
         # addr_info = re.search(r"^(\w+)\s*(\d+\w*)\s*,\s*(\d+\w*)\s(\w*)", addr_tot)
         # addr_info = re.search(r"\s*(\D*)\s*(\d*\w*)\s*,\s*(\d+\w*)\s(\w*)", addr_tot)
-        addr_info = re.search(r"\s*(\D*)\s*(\d*-?\d*\w*)\s*,\s*(\d+\w*)\s(\w*)", addr_tot)
+        addr_info = re.search(r"\s*(\D*)\s*(\d*-?/?\d*\w*)\s*,\s*(\d+\w*)\s(\w*)", addr_tot)
         try:
             street = addr_info.group(1).strip()
             street_num = addr_info.group(2)

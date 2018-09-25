@@ -50,7 +50,9 @@ layout = html.Div(className='container cm-top', children=[
                         dte.DataTable(
                             rows=[{}],
                             # columns=sorted(df_tel_result.columns), # optional - sets the order of columns
-                            row_selectable=True,
+                            row_selectable=False,
+                            editable=False,
+                            resizable=True,
                             filterable=True,
                             sortable=True,
                             selected_row_indices=[],

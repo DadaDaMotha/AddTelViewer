@@ -14,6 +14,8 @@ app.inject_custom_scripts_body(layouts.bootstrap_scripts + layouts.dashbord_simp
 
 wrapper = layouts.dashbord_simple
 app.set_main_wrapper(wrapper, replace_string=layouts.repl_string)
+app.static_page_title = 'AddTelViewer'
+
 # server = app.server
 # # cache = Cache(server, config={
 # #     'CACHE_TYPE': 'filesystem',

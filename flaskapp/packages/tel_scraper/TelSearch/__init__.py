@@ -11,7 +11,6 @@ Tel Search Limits the number of pages to 20.
 max_pages = 20
 entries_per_page = 10
 
-
 def get_entry_count(page):
     '''
 
@@ -84,7 +83,7 @@ def df_from_page(tel_search_url):
         addr_tot = addr_block.text
 
         # addr_info = re.search(r"^\s*(\w+)\s*(\d+\w*)\s*", addr_tot)
-        addr_info = re.search(r"\s*(\D*)(\d*-?\d*\w*)\s*,\s*(\d+\w*)\s(\w*)", addr_tot)
+        addr_info = re.search(r"\s*(\D*)(\d*-?/?\d*\w*)\s*,\s*(\d+\w*)\s(\w*)", addr_tot)
         if addr_info:
             street = addr_info.group(1)
             street_num = addr_info.group(2)

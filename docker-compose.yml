@@ -1,0 +1,62 @@
+version: '3'
+
+services:
+
+  web:
+    container_name: web
+    restart: always
+    build: ./images/flask-docker-gunicorn-base
+#    command: flask run --host=0.0.0.0 --port 8000
+    environment:
+#      FLASK_APP: /usr/src/run.py
+      # replaces Flask Debug
+      FLASK_ENV: development
+      GUNICORN_RELOAD: "true"
+      GUNICORN_LOGLEVEL: "warning"
+#      FLASK_DEBUG: 1
+    # Provide all environment with a file, same var names will be overwritten by last used in list
+#    env_file:
+#    - ./flask.env
+    volumes:
+      - "./flaskapp/:/home/project/flask_app"
+
+  nginx:
+    container_name: nginx
+    restart: always
+    build: ./images/nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - web
+
+#  postgres:
+#    image: postgres:latest
+#    container_name: postgres
+#    hostname: postgres
+#    restart: unless-stopped
+#    ports:
+#      - "5432:5432"
+#    environment:
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: postgres
+#      POSTGRES_DB: TEST_SM
+#    volumes:
+#      - pgdata:/var/lib/postgresql/data
+#
+#  pgadmin:
+#    image: dpage/pgadmin4:latest
+#    container_name: pdadmin
+#    depends_on:
+#      - postgres
+#    ports:
+#      - "4444:80"
+#    environment:
+#      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+#      PGADMIN_DEFAULT_PASSWORD: admin
+#    volumes:
+#      - pgadmin_config:/var/lib/pgadmin
+##      - "/private/var/lib/pgadmin:/var/lib/pgadmin"
+#
+#volumes:
+#  pgdata:
+#  pgadmin_config:

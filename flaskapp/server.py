@@ -5,7 +5,7 @@ import os
 import config
 
 basedir = os.path.dirname(os.path.abspath(__file__))
-server = flask.Flask(__name__)
+server = flask.Flask('Test')
 server.config.from_object(config.DevelopmentConfig)
 
 db = SQLAlchemy(server)

@@ -1,1 +1,14 @@
-
+Flask
+gunicorn
+dash
+dash-core-components
+dash-html-components
+dash-table-experiments
+dash-renderer
+Flask-SQLAlchemy
+MarkupSafe
+pandas
+plotly
+six
+beautifulsoup4
+geopy

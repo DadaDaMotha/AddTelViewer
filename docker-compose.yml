@@ -7,7 +7,7 @@ services:
     restart: always
     build: ./images/flask-docker-gunicorn-base
     environment:
-      FLASK_ENV: production
+      FLASK_ENV: development
 #      FLASK_DEBUG: 1
       GUNICORN_RELOAD: "true"
       GUNICORN_LOGLEVEL: "warning"    # debug

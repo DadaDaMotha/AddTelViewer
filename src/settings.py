@@ -2,7 +2,7 @@ import os
 from os import urandom
 
 BASEDIR = os.path.dirname(os.path.abspath(__file__))
-APP_NAME = os.path.split(BASEDIR)[-1]
+APPS_DIR = os.path.join(BASEDIR, 'SinglePageDashApps')
 
 DB_NAME = os.environ.get('DB_NAME')
 DB_USER = os.environ.get('DB_USER')
@@ -10,7 +10,7 @@ DB_PASSWORD = os.environ.get('DB_PASSWORD')
 FLASK_ENV = os.environ.get('FLASK_ENV')
 DB_BACKEND = os.environ.get('DB_BACKEND')
 
-STATIC_ROOT = 'static'
+STATIC_ROOT = '/var/www/static'
 
 if DB_BACKEND == 'postgres':
     SQLALCHEMY_DATABASE_URI = f'postgresql://{DB_USER}:{DB_PASSWORD}@postgres:5432/{DB_NAME}'

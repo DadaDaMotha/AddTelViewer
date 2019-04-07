@@ -3,7 +3,7 @@ FROM python:3.7.0
 MAINTAINER dadadamotha@gmail.com
 LABEL dockerfile_location="" \
       image_name=flask-docker-gunicorn-base \
-      base_image=python:3
+      base_image=python:3.7.0
 
 ENV PYTHONUNBUFFERED 1
 

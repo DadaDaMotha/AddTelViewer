@@ -81,7 +81,7 @@ class DashResponsive(dash.Dash):
         config = self._generate_config_html()
         # title = getattr(self, 'title', 'Dash')
         title = self.static_page_title
-        return ('''
+        return (f'''
         <!DOCTYPE html>
         <html>
             <head>
@@ -89,25 +89,22 @@ class DashResponsive(dash.Dash):
                 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
                 <meta name="description" content="">
                 <meta name="author" content="">
-                <title>{}</title>
-                {}
-                {}
-                {}
+                <title>{title}</title>
+                {self.custom_css_before}
+                {css}
+                {self.custom_css_after}
             </head>
             <body>
-                {}
-                {}
-                {}
-                {}
+                {self.inject_before_entrypoint}
+                {self.create_wrapper()}
+                {self.inject_after_entrypoint}
+                {self.custom_scripts_body}
             </body>
             <footer>
-                {}
-                {}
-                {}
-                {}
+                {config}
+                {self.custom_scripts_footer_before}
+                {scripts}
+                {self.custom_scripts_footer_after}
             </footer>
         </html>
-        '''.format(title, self.custom_css_before, css, self.custom_css_after,
-                   self.inject_before_entrypoint, self.create_wrapper(), self.inject_after_entrypoint, self.custom_scripts_body,
-                   config,
-                   self.custom_scripts_footer_before, scripts, self.custom_scripts_footer_after))
+        ''')

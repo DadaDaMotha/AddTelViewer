@@ -3,7 +3,6 @@ version: '3'
 services:
 
   web:
-    container_name: web
     restart: always
     build: ./images/flask-docker-gunicorn-base
     environment:
@@ -15,7 +14,6 @@ services:
       - "./flaskapp/:/home/project/flask_app"
 
   nginx:
-    container_name: nginx
     restart: always
     build: ./images/nginx
     ports:

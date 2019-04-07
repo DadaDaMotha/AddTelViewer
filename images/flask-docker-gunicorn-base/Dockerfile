@@ -1,5 +1,5 @@
 # images/flask-docker-gunicorn-base/Dockerfile
-FROM python:3
+FROM python:3.7.0
 MAINTAINER dadadamotha@gmail.com
 LABEL dockerfile_location="" \
       image_name=flask-docker-gunicorn-base \
@@ -10,10 +10,7 @@ ENV PYTHONUNBUFFERED 1
 RUN mkdir -p /var/www/static && mkdir -p /var/www/media && mkdir -p /etc/gunicorn && mkdir -p /home/project/flask_app
 WORKDIR /home/project/flask_app
 COPY base-requirements.txt .
-COPY requirements.txt .
 RUN pip install --upgrade pip && pip install --no-cache-dir -r base-requirements.txt
-RUN pip install --no-cache-dir --no-cache-dir -r requirements.txt
-
 
 # volume can be used to serve these files with a webserver
 VOLUME /var/www/static

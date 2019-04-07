@@ -6,17 +6,11 @@ services:
     container_name: web
     restart: always
     build: ./images/flask-docker-gunicorn-base
-#    command: flask run --host=0.0.0.0 --port 8000
     environment:
-#      FLASK_APP: /usr/src/run.py
-      # replaces Flask Debug
-      FLASK_ENV: development
-      GUNICORN_RELOAD: "true"
-      GUNICORN_LOGLEVEL: "warning"
+      FLASK_ENV: production
 #      FLASK_DEBUG: 1
-    # Provide all environment with a file, same var names will be overwritten by last used in list
-#    env_file:
-#    - ./flask.env
+      GUNICORN_RELOAD: "true"
+      GUNICORN_LOGLEVEL: "warning"    # debug
     volumes:
       - "./flaskapp/:/home/project/flask_app"
 

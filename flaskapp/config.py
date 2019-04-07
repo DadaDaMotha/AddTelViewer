@@ -3,7 +3,7 @@ from os import urandom
 basedir = os.path.dirname(os.path.abspath(__file__))
 
 
-dev_db_name = 'telscraper.db'
+dev_db_name = 'sample.db'
 
 info_page_file = os.path.join(basedir, 'Documentation.md')
 '''
@@ -20,14 +20,15 @@ class Config(object):
     SECRET_KEY = urandom(16)
 
 class DevelopmentConfig(Config):
-    FLASK_ENV = 'development'
+    FLASK_ENV = os.environ.get('FLASK_ENV')
     TESTING = True
     SQLALCHEMY_DATABASE_URI = 'sqlite:////{}'.format(os.path.join(basedir, dev_db_name))
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 # Todo: Add environment variables
 class ProductionConfig(Config):
     FLASK_ENV = 'production'
     TESTING = False
-    SQLALCHEMY_DATABASE_URI = 'postgresql://telscraper:vood005643@postgres:5432/telscraper'
-
+    SQLALCHEMY_DATABASE_URI = 'postgresql://user:password@postgres:5432/db_name'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False

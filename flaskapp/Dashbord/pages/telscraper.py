@@ -8,8 +8,6 @@ from Dashbord.app import app
 from six.moves.urllib.parse import quote
 import datetime as dt
 
-from db_models import Phonebook
-
 
 from packages.tel_scraper import LocalCH, TelSearch
 

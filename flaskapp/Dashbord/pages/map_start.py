@@ -43,12 +43,12 @@ graph_layout = go.Layout(
     ),
 )
 
-layout = html.Div(className='container cm-top', children=[
+layout = html.Div(className='container mt-4', children=[
 
             html.H2('Interactive Search with geopy and PLZ CH'),
 
 
-            html.Div(className='row', children=[
+            html.Div(className='row my-4', children=[
                 html.Div(className='col-sm-3', children=[
 
                         dcc.Dropdown(id='choose-plz', className='mt',

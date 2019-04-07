@@ -13,12 +13,12 @@ from db_models import Phonebook
 
 from packages.tel_scraper import LocalCH, TelSearch
 
-layout = html.Div(className='container cm-top', children=[
+layout = html.Div(className='container mt-4', children=[
 
             html.H2('Search Local CH and TelSearch'),
 
 
-            html.Div(className='row', children=[
+            html.Div(className='row my-4', children=[
                 html.Div(className='col-sm-2', children=[
                     dcc.Dropdown(id='source-dropdown', className='mt',
                              options=[{'label': x, 'value': x} for x in ['TelSearch', 'LocalCH']], value='LocalCH',
@@ -38,12 +38,14 @@ layout = html.Div(className='container cm-top', children=[
                              options=[{'label': x, 'value': x} for x in ['Private', 'Firmen']], value='',
                  clearable=True, placeholder='Kategorie: Beide')
                 ]),
+            ]),
+                html.Div(className='row my-4', children=[
                 html.Div(className='col-sm-3', children=[
                     html.Button(id="button-query", className='btn btn-outline-info btn-primary mt', children="SUCHEN",
                                 n_clicks=0),
                 ]),
             ]),
-            html.Div(className='row', children=[
+            html.Div(className='row my-4', children=[
                 html.Div(className='col-sm-12', children=[
 
                     html.Div(className='mt', children=[
@@ -59,15 +61,13 @@ layout = html.Div(className='container cm-top', children=[
                             id='datatable-query'
                         )
                     ]),
-                    html.Div(className='col-sm-3', children=[
-                        html.A('DOWNLOAD',
-                                id='download-link',
-                                download="localch_{}.csv".format(dt.datetime.now().strftime('%Y_%m_%d_%H%M')),
-                                href="",
-                                target="_blank",
-                                className='btn btn-info btn-primary mt'
-                            ),
-                    ])
+                    html.A('DOWNLOAD',
+                            id='download-link',
+                            download="localch_{}.csv".format(dt.datetime.now().strftime('%Y_%m_%d_%H%M')),
+                            href="",
+                            target="_blank",
+                            className='btn btn-info btn-primary mt-4'
+                        ),
                 ])
             ])
         ])

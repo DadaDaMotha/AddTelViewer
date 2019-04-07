@@ -6,7 +6,7 @@ from config import info_page_file
 
 markdown_string = read_file_as_str(info_page_file)
 
-layout = html.Div(className='container cm-top', children=[
+layout = html.Div(className='container mt-4', children=[
     html.Div(className='row', children=[
         html.Div(className='col-md-10', children=[
             dcc.Markdown(markdown_string)

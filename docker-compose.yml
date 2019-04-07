@@ -3,23 +3,22 @@ version: '3'
 services:
 
   web:
-    container_name: web
     restart: always
     build: ./images/flask-docker-gunicorn-base
     environment:
-      FLASK_APP: run
       # replaces Flask Debug
-      FLASK_ENV: development
+      FLASK_ENV: debug
       GUNICORN_RELOAD: "true"
       GUNICORN_LOGLEVEL: "warning"
       DB_BACKEND: 'sqlite'
       DB_NAME: "addtel"
       DB_USER: "addtel"
       DB_PASSWORD: "changeforprod"
+      LOCAL_USER_ID: 1000
     volumes:
       - "./src:/src"
-      - "static:/src/static"
-#      - "media:/src/www/media"
+      - "static:/var/www/static"
+#      - "media:/code/www/media"
 
   nginx:
     container_name: nginx
@@ -32,6 +31,9 @@ services:
     volumes:
       - "static:/var/www/static"
       - "media:/var/www/media"
+    environment:
+      LOCAL_USER_ID: 1000
+
 
 #  postgres:
 #    image: postgres:latest

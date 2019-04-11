@@ -12,7 +12,7 @@ javascript and html assets, Linkt to Routes
 
 First, you need docker and docker compose. To run the app on `localhost:8080`:
 
-    docker-compoes up --build
-    
+    docker-compose up --build
+
 **WARNING**: Web Scraping of the phone book and saving this data into a database is illegal. The creator of
 this repo does not hold responsible for any abuse of this software.

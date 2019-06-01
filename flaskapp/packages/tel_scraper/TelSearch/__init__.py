@@ -3,6 +3,7 @@ from .. import utils
 import pandas as pd
 import re
 from urllib.parse import quote_plus as urlquote
+from collections import OrderedDict
 
 '''
 Tel Search Limits the number of pages to 20.
@@ -67,7 +68,7 @@ def generate_search_url(was='', wo='', category=None, page=None):
     return url
 
 def df_from_page(tel_search_url):
-    ddict = {key: [] for key in db_cols}
+    ddict = OrderedDict((key, []) for key in db_cols)
     page = utils.get_one_page(tel_search_url)
     # result_count = page.h1
 

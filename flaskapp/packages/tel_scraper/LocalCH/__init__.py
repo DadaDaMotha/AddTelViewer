@@ -5,6 +5,7 @@ from .. import utils
 import re
 from urllib.parse import quote_plus as urlquote
 import numpy as np
+from collections import OrderedDict
 
 
 entries_per_page = 10
@@ -66,12 +67,12 @@ def generate_search_url(was='', wo='', category=None, page=None):
 
     return url
 
+
 def df_from_page(local_ch_search_url):
-    ddict = {key: [] for key in db_cols}
+    ddict = OrderedDict((key, []) for key in db_cols)
     page = utils.get_one_page(local_ch_search_url)
 
     containers = page.body.findAll('div', {'class': 'listing-container'})
-
 
     for container in containers:
         container.a.find('span', {'class': 'listing-title'})
@@ -103,8 +104,6 @@ def df_from_page(local_ch_search_url):
             street_num = np.nan
             plz = np.nan
             ort = ''
-
-
         try:
             cat = container.find('div', {'class': 'listing-categories'}).text
         except:
@@ -142,7 +141,7 @@ def page_aggregator(query_dict, max_pages=None):
     print('cat', cat)
 
     if not was and not wo:
-        raise AssertionError('Leere Suchanfrage!')
+        raise AssertionError('Leere Suchanfragget_entry_counte!')
 
     # create initial url
     url_initial = generate_search_url(was=was, wo=wo, category=cat)

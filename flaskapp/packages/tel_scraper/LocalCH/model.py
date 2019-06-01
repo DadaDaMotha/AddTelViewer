@@ -1,25 +1,10 @@
-#
-# db_cols = [
-#     'Addresse',
-#     'Betriebsart',
-#     'Bezeichnung',
-#     'Kategorie',
-#     'Ort',
-#     'PLZ',
-#     'Region',
-#     'Telefon',
-#     'Website',
-#     'Werbung'
-#     ]
-
-
 db_cols = [
     'Betriebsart',
     'Bezeichnung',
-    'Hausnummer',
-    'Ort',
-    'PLZ',
     'Strasse',
+    'Hausnummer',
+    'PLZ',
+    'Ort',
     'Telefon',
     'URL',
     'Website'

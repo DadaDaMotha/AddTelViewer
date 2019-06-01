@@ -8,7 +8,6 @@ from Dashbord.app import app
 from packages.GeoTools import GeoLocator
 from packages.PLZTools import PLZLoader
 
-
 map_center_lat = 46.61
 map_center_long = 6.50
 
@@ -25,10 +24,9 @@ PLZ = PLZLoader(test_sample=False)
 # center_lat, center_long = query.boundbox_center()
 map_box_token = 'pk.eyJ1IjoiZGFkYWRhbW90aGEiLCJhIjoiY2ptZ2Y2bmlhMDJ4OTN2cWp2MW5pNmlxMCJ9.--w_TfMoej4yvld_tN919Q'
 
-
 graph_layout = go.Layout(
     autosize=False,
-    height = 450,
+    height=450,
     hovermode='closest',
 
     mapbox=dict(
@@ -45,29 +43,28 @@ graph_layout = go.Layout(
 
 layout = html.Div(className='container mt-4', children=[
 
-            html.H2('Interactive Search with geopy and PLZ CH'),
+    html.H2('Interactive Search with geopy and PLZ CH'),
 
+    html.Div(className='row my-4', children=[
+        html.Div(className='col-sm-3', children=[
 
-            html.Div(className='row my-4', children=[
-                html.Div(className='col-sm-3', children=[
+            dcc.Dropdown(id='choose-plz', className='mt',
+                         options=PLZ.get_Dash_PLZ_all_opts(loc_only=False), value='1217!!Meyrin 1',
+                         multi=False)
+        ]),
+        html.Div(className='col-sm-3', children=[
+            dcc.Input(id="geopy-search", className='form-control form-control mt', type="text", size=20,
+                      placeholder="Irgendwas suchen...")
+        ]),
+        html.Div(className='col-sm-3', children=[
+            html.Button(id="button-search", className='btn btn-outline-info btn-primary mt', children="SUCHEN",
+                        n_clicks=0),
+        ]),
+    ]),
+    dcc.Graph(id='graph', className='shadow mt', figure=dict(data=[], layout=graph_layout))
 
-                        dcc.Dropdown(id='choose-plz', className='mt',
-                                     options=PLZ.get_Dash_PLZ_all_opts(loc_only=False), value='1217!!Meyrin 1',
-                                     multi=False)
-                    ]),
-                html.Div(className='col-sm-3', children=[
-                    dcc.Input(id="geopy-search", className='form-control form-control mt', type="text", size=20,
-                              placeholder="Irgendwas suchen...")
-                ]),
-                html.Div(className='col-sm-3', children=[
-                    html.Button(id="button-search", className='btn btn-outline-info btn-primary mt', children="SUCHEN",
-                                n_clicks=0),
-                ]),
-            ]),
-            dcc.Graph(id='graph', className='shadow mt', figure=dict(data=[], layout=graph_layout))
+])
 
-
-        ])
 
 # layout = html.Div(className='container', children=[
 #     html.Div(className='three columns', children=[
@@ -164,12 +161,9 @@ def display_data(plz_name, n_clicks, query):
     fig = dict(data=data, layout=graph_layout)
     return fig
 
+
 @app.callback(
     Output('geopy-search', 'value'),
     [Input('choose-plz', 'value')])
-
 def clear_search_field(plz):
     return []
-
-
-

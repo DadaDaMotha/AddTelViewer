@@ -70,6 +70,7 @@ def generate_search_url(was='', wo='', category=None, page=None):
 
 def df_from_page(local_ch_search_url):
     ddict = OrderedDict((key, []) for key in db_cols)
+    ddict['URL'] = []
     page = utils.get_one_page(local_ch_search_url)
 
     containers = page.body.findAll('div', {'class': 'listing-container'})
@@ -119,7 +120,7 @@ def df_from_page(local_ch_search_url):
         ddict['URL'].append(local_ch_search_url)
         ddict['Website'].append(website)
 
-    df = pd.DataFrame(data=ddict)
+    df = pd.DataFrame(data=ddict, columns=list(ddict.keys()))
     return df
 
 def page_aggregator(query_dict, max_pages=None):

@@ -6,6 +6,5 @@ db_cols = [
     'PLZ',
     'Ort',
     'Telefon',
-    'URL',
     'Website'
 ]

@@ -69,6 +69,7 @@ def generate_search_url(was='', wo='', category=None, page=None):
 
 def df_from_page(tel_search_url):
     ddict = OrderedDict((key, []) for key in db_cols)
+    ddict['URL'] = []
     page = utils.get_one_page(tel_search_url)
     # result_count = page.h1
 
@@ -146,7 +147,7 @@ def df_from_page(tel_search_url):
         ddict['Website'].append(website)
         ddict['Werbung'].append(werbung_jn)
 
-    df = pd.DataFrame(data=ddict)
+    df = pd.DataFrame(data=ddict, columns=list(ddict.keys()))
     return df
 
 def page_aggregator(query_dict, max_pages=max_pages):

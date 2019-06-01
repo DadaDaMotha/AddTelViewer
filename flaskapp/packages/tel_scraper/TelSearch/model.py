@@ -8,7 +8,6 @@ db_cols = [
     'PLZ',
     'Region',
     'Telefon',
-    'URL',
     'Website',
     'Werbung'
     ]

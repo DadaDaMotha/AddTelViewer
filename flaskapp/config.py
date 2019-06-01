@@ -22,9 +22,11 @@ class Config(object):
 class DevelopmentConfig(Config):
     FLASK_ENV = os.environ.get('FLASK_ENV')
     TESTING = True
+    DEBUG = True
 
 
 # Todo: Add environment variables
 class ProductionConfig(Config):
     FLASK_ENV = 'production'
     TESTING = False
+    DEBUG = False

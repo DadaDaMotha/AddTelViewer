@@ -135,12 +135,17 @@ def get_data(n_clicks, was, wo, cat, source):
 @app.callback(
     Output('download-link', 'href'),
     [Input('datatable-query', 'derived_viewport_data')],
-    state=[State('output-fmt', 'value')]
+    state=[State('output-fmt', 'value'), State('source-dropdown', 'value')]
 )
-def update_download_link(rows, output_fmt):
+def update_download_link(rows, output_fmt, source):
     if rows == [{}] or rows is None:
         return ""
-    dff = pd.DataFrame.from_dict(rows, 'columns')
+    if source == 'LocalCH':
+        dff = pd.DataFrame.from_dict(rows, orient='columns')
+        dff = dff[lch_cols]
+    elif source == 'TelSearch':
+        dff = pd.DataFrame.from_dict(rows, orient='columns')
+        dff = dff[tls_cols]
     if output_fmt == 'mmqgis':
         dff = add_mmqgis_fields(dff)
     csv_string = dff.to_csv(index=False, encoding='utf-8', sep=';')

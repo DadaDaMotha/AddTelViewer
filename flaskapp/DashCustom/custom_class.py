@@ -1,110 +1,84 @@
 import dash
+
+
 class DashResponsive(dash.Dash):
-    '''
-    This class extends the dash.Dash class with a wrapper html element and other injections defined below
-    '''
-    def __init__(self, *args, **kwargs):
-
-        super(DashResponsive, self).__init__(*args, **kwargs)
-
-
-        self.main_wrapper = ""
-        self.replace_string = ""
-
-        self.custom_css_before = ""
-        self.custom_css_after = ""
-
-        self.custom_scripts_body = ""
-        self.custom_scripts_footer_before = ""
-        self.custom_scripts_footer_after = ""
-
-        self.inject_before_entrypoint = ""
-        self.inject_after_entrypoint = ""
-
-        self.inject_footer = ""
-        self.static_page_title = 'DashResponsive'
-
-
-
-    def inject_html_before(self, raw_html):
-        self.inject_before_entrypoint = raw_html
-
-    def inject_html_after(self, raw_html):
-        self.inject_after_entrypoint = raw_html
-
-    def inject_html_footer(self, raw_html):
-        self.inject_footer = raw_html
-
-    def inject_custom_css_before(self, raw_html):
-        self.custom_css_before = raw_html
-
-    def inject_custom_css_after(self, raw_html):
-        self.custom_css_after = raw_html
-
-    def inject_custom_scripts_body(self, raw_html):
-        self.custom_scripts_body = raw_html
-
-    def inject_custom_sripts_footer_after(self, raw_html):
-        self.custom_scripts_footer_after = raw_html
-
-    def inject_custom_sripts_footer_before(self, raw_html):
-        self.custom_scripts_footer_before = raw_html
-
-    def set_main_wrapper(self, raw_html, replace_string):
-        self.replace_string = replace_string
-        self.main_wrapper = raw_html
-
-    def dash_div(self):
-        return ("""
-        <div id="react-entry-point">
-                    <div class="_dash-loading">
-                        Loading...
-                    </div>
-        </div>
-        """)
-
-    def create_wrapper(self):
-
-        dash_cont = """
-        <div id="react-entry-point">
-                    <div class="_dash-loading">
-                        Loading...
-                    </div>
-        </div>
-        """
-        return self.main_wrapper.replace(self.replace_string, dash_cont)
-
-    # Overriding from https://github.com/plotly/dash/blob/master/dash/dash.py#L282
-    def index(self, *args, **kwargs):
-        scripts = self._generate_scripts_html()
-        css = self._generate_css_dist_html()
-        config = self._generate_config_html()
-        # title = getattr(self, 'title', 'Dash')
-        title = self.static_page_title
-        return (f'''
+    def interpolate_index(self, **kwargs):
+        return '''
         <!DOCTYPE html>
-        <html>
-            <head>
-                <meta charset="UTF-8"/>
-                <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-                <meta name="description" content="">
-                <meta name="author" content="">
-                <title>{title}</title>
-                {self.custom_css_before}
-                {css}
-                {self.custom_css_after}
-            </head>
-            <body>
-                {self.inject_before_entrypoint}
-                {self.create_wrapper()}
-                {self.inject_after_entrypoint}
-                {self.custom_scripts_body}
-            </body>
-            <footer>
-                {config}
-                {self.custom_scripts_footer_before}
-                {scripts}
-                {self.custom_scripts_footer_after}
-            </footer>
-        </html>
-        ''')
+<html>
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>AddTelViewer</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.1/examples/dashboard/dashboard.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-light fixed-top bg-light flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/">PLZ Finder</a>
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="/login">Einloggen</a>
+            </li>
+        </ul>
+
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link icyLink" href="/">
+                                <span data-feather="map-pin"></span>
+                                GeoTools<span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link icyLink" href="/telscraper/">
+                                <span data-feather="book-open"></span>
+                                TelScraper<span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link icyLink" href="/info/">
+                                <span data-feather="info"></span>
+                                Info
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 ">
+                {app_entry}
+            </main>
+        </div>
+    </div>
+    {config}
+    {scripts}
+    {renderer}
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace()
+    </script>    
+</body>
+</html>
+        '''.format(
+            app_entry=kwargs.get('app_entry'),
+            config=kwargs.get('config'),
+            scripts=kwargs.get('scripts'),
+            renderer=kwargs.get('renderer'))
+
+
+

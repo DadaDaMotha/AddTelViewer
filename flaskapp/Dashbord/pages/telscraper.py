@@ -70,7 +70,6 @@ layout = html.Div(className='container mt-4', children=[
                 children=[
                     html.A('DOWNLOAD',
                            id='download-link',
-                           download="localch_{}.csv".format(dt.datetime.now().strftime('%Y_%m_%d_%H%M')),
                            href="",
                            target="_blank",
                            className='btn btn-info btn-primary'
@@ -133,13 +132,14 @@ def get_data(n_clicks, was, wo, cat, source):
 
 
 @app.callback(
-    Output('download-link', 'href'),
-    [Input('datatable-query', 'derived_viewport_data')],
-    state=[State('output-fmt', 'value'), State('source-dropdown', 'value')]
+    [Output('download-link', 'href'), Output('download-link', 'download')],
+    [Input('datatable-query', 'derived_viewport_data'), Input('source-dropdown', 'value')],
+    state=[State('output-fmt', 'value')]
 )
-def update_download_link(rows, output_fmt, source):
+def update_download_link(rows, source, output_fmt):
+    timestamp = dt.datetime.now().strftime('%Y_%m_%d_%H%M')
     if rows == [{}] or rows is None:
-        return ""
+        return "", f"{source}_{timestamp}.csv"
     if source == 'LocalCH':
         dff = pd.DataFrame.from_dict(rows, orient='columns')
         dff = dff[lch_cols]
@@ -150,5 +150,6 @@ def update_download_link(rows, output_fmt, source):
         dff = add_mmqgis_fields(dff)
     csv_string = dff.to_csv(index=False, encoding='utf-8', sep=';')
     csv_string = "data:text/csv;charset=utf-8,%EF%BB%BF" + quote(csv_string)
-    return csv_string
+
+    return csv_string, f"{source}_{timestamp}.csv"
 

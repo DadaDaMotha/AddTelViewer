@@ -10,9 +10,16 @@ javascript and html assets, Linkt to Routes
 
 ## How to run this app
 
-First, you need docker and docker compose. To run the app on `localhost:8080`:
+You can install the dependencies with `pipenv install` if pipenv is used or use the `requierements.txt`.
+You can start the app with running `wsgi.py` or also directly with uwsgi from flaskapp directory:
+
+    uwsgi --http :8000 --wsgi-file wsgi.py --master --processes 4 --threads 2
+
+You can also use it with docker to access the app in `localhost:8080`:
 
     docker-compose up --build
 
 **WARNING**: Web Scraping of the phone book and saving this data into a database is illegal. The creator of
 this repo does not hold responsible for any abuse of this software.
+
+

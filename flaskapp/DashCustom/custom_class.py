@@ -14,6 +14,8 @@ class DashResponsive(dash.Dash):
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link href="https://getbootstrap.com/docs/4.1/examples/dashboard/dashboard.css" rel="stylesheet">
+    <link href="/static/custom_css.css" rel="stylesheet">
+    <link href="/static/load_ctrl_clr.css" rel="stylesheet">
 </head>
 
 <body>

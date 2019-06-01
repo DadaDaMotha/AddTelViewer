@@ -4,11 +4,11 @@ from server import application
 app = DashResponsive(name="dashboard", sharing=True, server=application, url_base_pathname='/')
 app.config.supress_callback_exceptions = True
 
-external_css = ['/static/custom_css.css',
-                '/static/load_ctrl_clr.css'
-]
-for css in external_css:
-    app.css.append_css({"external_url": css})
+# external_css = ['/static/custom_css.css',
+#                 '/static/load_ctrl_clr.css'
+# ]
+# for css in external_css:
+#     app.css.append_css({"external_url": css})
 #
 # external_scripts = ['https://code.jquery.com/jquery-3.3.1.slim.min.js',
 #                     'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js',

@@ -13,6 +13,7 @@ pandas = "*"
 dash = "*"
 beautifulsoup4 = "*"
 geopy = "*"
+uwsgi = "*"
 
 [requires]
 python_version = "3.7"

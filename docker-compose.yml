@@ -1,22 +1,14 @@
 version: '3'
 
 services:
-
   web:
     restart: always
-    build: ./images/flask-docker-gunicorn-base
+    build: .
+    image: addtel
     environment:
       FLASK_ENV: development
-#      FLASK_DEBUG: 1
-      GUNICORN_RELOAD: "true"
-      GUNICORN_LOGLEVEL: "warning"    # debug
     volumes:
-      - "./flaskapp/:/home/project/flask_app"
-
-  nginx:
-    restart: always
-    build: ./images/nginx
+      - "./flaskapp:/home/project/flask_app"
+    command: /usr/local/bin/uwsgi --http :8080 --wsgi-file wsgi.py --master --processes 4 --threads 2
     ports:
-      - "8080:80"
-    depends_on:
-      - web
+      - "8080:8080"

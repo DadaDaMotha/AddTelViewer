@@ -1,7 +1,7 @@
 from DashCustom.custom_class import DashResponsive
-from server import server
+from server import application
 
-app = DashResponsive(name="dashboard", sharing=True, server=server, url_base_pathname='/')
+app = DashResponsive(name="dashboard", sharing=True, server=application, url_base_pathname='/')
 app.config.supress_callback_exceptions = True
 
 external_css = ['/static/custom_css.css',

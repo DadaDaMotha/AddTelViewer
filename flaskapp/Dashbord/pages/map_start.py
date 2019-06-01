@@ -12,16 +12,6 @@ map_center_lat = 46.61
 map_center_long = 6.50
 
 PLZ = PLZLoader(test_sample=False)
-# df = pd.read_csv(
-#     'https://raw.githubusercontent.com/plotly' +
-#     '/datasets/master/2011_february_us_airport_traffic.csv')
-
-# address = 'Zurich City'
-#
-# GL = GeoLocator()
-# query = GL.make_query(address)
-# query.info_print()
-# center_lat, center_long = query.boundbox_center()
 map_box_token = 'pk.eyJ1IjoiZGFkYWRhbW90aGEiLCJhIjoiY2ptZ2Y2bmlhMDJ4OTN2cWp2MW5pNmlxMCJ9.--w_TfMoej4yvld_tN919Q'
 
 graph_layout = go.Layout(
@@ -64,27 +54,6 @@ layout = html.Div(className='container mt-4', children=[
     dcc.Graph(id='graph', className='shadow mt', figure=dict(data=[], layout=graph_layout))
 
 ])
-
-
-# layout = html.Div(className='container', children=[
-#     html.Div(className='three columns', children=[
-#             html.Div(id='lasso')], style={'display':'none'}),
-#
-#         html.Div(className='ten columns', children=[
-#             html.H1('Interactive Search with geopy and PLZ CH'),
-#             dcc.Dropdown(id='choose-plz', options=PLZ.get_Dash_PLZ_all_opts(loc_only=False), value=1270, multi=False),
-#             dcc.Input(type="text", size=20, id="geopy-search", placeholder="Irgendwas suchen..."),
-#             html.Button(id="button-search", children="SEARCH", n_clicks=0),
-#
-#             dcc.Graph(id='graph', figure=dict(data=[], layout=graph_layout))])
-#
-#         ])
-
-# @app.callback(
-#     Output('lasso', 'children'),
-#     [Input('graph', 'selectedData')])
-# def display_data(selectedData):
-#     return json.dumps(selectedData, indent=2)
 
 @app.callback(
     Output('graph', 'figure'),

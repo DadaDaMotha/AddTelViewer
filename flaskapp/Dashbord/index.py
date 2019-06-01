@@ -1,7 +1,6 @@
 from dash.dependencies import Input, Output
 import dash_core_components as dcc
 import dash_html_components as html
-import dash_table_experiments as dte
 
 from Dashbord.app import app
 from Dashbord.pages import map_start, telscraper, info
@@ -10,7 +9,7 @@ from Dashbord.pages import map_start, telscraper, info
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
     html.Div(id='page-content', className='mt'),
-html.Div(dte.DataTable(rows=[{}]), style={'display': 'none'})
+# html.Div(dte.DataTable(rows=[{}]), style={'display': 'none'})
 ])
 
 @app.callback(Output('page-content', 'children'),

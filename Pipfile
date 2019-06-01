@@ -6,8 +6,13 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-beautifulsoup4 = "*"
+dash-table-experiments = "*"
+dash-renderer = "*"
 pytest = "*"
+pandas = "*"
+dash = "*"
+beautifulsoup4 = "*"
+geopy = "*"
 
 [requires]
 python_version = "3.7"

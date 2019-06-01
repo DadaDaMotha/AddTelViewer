@@ -16,7 +16,7 @@ app.config: In both cases (loading from any Python file or loading from modules)
 
 class Config(object):
     # DEBUG = True
-    CSRF_ENABLED = True
+    CSRF_ENABLED = False
     SECRET_KEY = urandom(16)
 
 class DevelopmentConfig(Config):

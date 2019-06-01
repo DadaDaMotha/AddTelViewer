@@ -1,6 +1,6 @@
 import flask
 from flask import send_from_directory
-from flask_sqlalchemy import SQLAlchemy
+# from flask_sqlalchemy import SQLAlchemy
 import os
 import config
 
@@ -8,7 +8,7 @@ basedir = os.path.dirname(os.path.abspath(__file__))
 server = flask.Flask('Test')
 server.config.from_object(config.DevelopmentConfig)
 
-db = SQLAlchemy(server)
+# db = SQLAlchemy(server)
 
 @server.route('/hello')
 def hello():
